@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Search — Discover Your Next Movie</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="movie-style.css">
+<base target="_blank">
+</head>
+<body>
+  <div class="app" id="app">
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <a href="#" class="nav-logo" onclick="showHome(); return false;">
+        <i class="fas fa-film"></i> Movie Search
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#" class="active" data-view="home" onclick="showHome(); return false;">Home</a></li>
+        <li><a href="#" data-view="popular" onclick="showCategory('popular'); return false;">Popular</a></li>
+        <li><a href="#" data-view="top_rated" onclick="showCategory('top_rated'); return false;">Top Rated</a></li>
+        <li><a href="#" data-view="newest" onclick="showCategory('newest'); return false;">Newest</a></li>
+      </ul>
+      <div class="nav-search">
+        <i class="fas fa-search"></i>
+        <input type="text" id="navSearchInput" placeholder="Search movies..." autocomplete="off">
+        <button class="search-clear" id="searchClear" style="display:none;"><i class="fas fa-times"></i></button>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#" onclick="showHome(); closeMobileMenu(); return false;"><i class="fas fa-home"></i> Home</a>
+      <a href="#" onclick="showCategory('popular'); closeMobileMenu(); return false;"><i class="fas fa-fire"></i> Popular</a>
+      <a href="#" onclick="showCategory('top_rated'); closeMobileMenu(); return false;"><i class="fas fa-star"></i> Top Rated</a>
+      <a href="#" onclick="showCategory('newest'); closeMobileMenu(); return false;"><i class="fas fa-calendar"></i> Newest</a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+      <!-- HOME / HERO -->
+      <section class="hero-section" id="heroSection">
+        <div class="hero-left">
+          <h1>Discover<br><span>Your Next Movie</span></h1>
+          <p>Search and explore thousands of movies from our curated database.</p>
+          <div class="hero-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="heroSearchInput" placeholder="Search for movies, actors, genres...">
+            <button class="hero-search-btn" id="heroSearchBtn">Search</button>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="hero-image">
+            <i class="fas fa-film"></i>
+          </div>
+        </div>
+      </section>
+
+      <!-- POPULAR MOVIES -->
+      <section class="movies-section" id="popularSection">
+        <div class="section-header">
+          <h2>Popular Movies</h2>
+          <a href="#" class="view-all" onclick="showCategory('popular'); return false;">View All</a>
+        </div>
+        <div class="movies-grid" id="popularGrid"></div>
+      </section>
+
+      <!-- TOP RATED MOVIES -->
+      <section class="movies-section" id="topRatedSection">
+        <div class="section-header">
+          <h2>Top Rated</h2>
+          <a href="#" class="view-all" onclick="showCategory('top_rated'); return false;">View All</a>
+        </div>
+        <div class="movies-grid" id="topRatedGrid"></div>
+      </section>
+    </main>
+
+    <!-- SEARCH RESULTS -->
+    <section class="search-results" id="searchResults" style="display:none;">
+      <div class="main-content">
+        <div class="search-header">
+          <h2 id="searchTitle">Search Results</h2>
+          <button class="back-btn" onclick="showHome()"><i class="fas fa-arrow-left"></i> Back to Home</button>
+        </div>
+        <div class="results-count" id="searchCount"></div>
+        <div class="movies-grid" id="searchGrid"></div>
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </section>
+
+    <!-- CATEGORY VIEW -->
+    <section class="category-view" id="categoryView" style="display:none;">
+      <div class="main-content">
+        <div class="search-header">
+          <h2 id="categoryTitle">Popular</h2>
+          <button class="back-btn" onclick="showHome()"><i class="fas fa-arrow-left"></i> Back to Home</button>
+        </div>
+        <div class="sort-bar" id="categorySort">
+          <label>Sort by:</label>
+          <select id="sortSelect" onchange="sortCategory()">
+            <option value="rating_desc">Rating: High to Low</option>
+            <option value="rating_asc">Rating: Low to High</option>
+            <option value="year_desc">Year: Newest First</option>
+            <option value="year_asc">Year: Oldest First</option>
+            <option value="votes_desc">Most Voted</option>
+            <option value="title_asc">Title: A-Z</option>
+          </select>
+        </div>
+        <div class="movies-grid" id="categoryGrid"></div>
+        <div class="pagination" id="categoryPagination"></div>
+      </div>
+    </section>
+
+    <!-- MOVIE DETAIL -->
+    <section class="movie-detail" id="movieDetail" style="display:none;">
+      <div class="main-content">
+        <button class="back-btn detail-back" onclick="goBack()"><i class="fas fa-arrow-left"></i> Back to Results</button>
+        <div class="detail-content" id="detailContent"></div>
+        <div class="similar-section" id="similarSection">
+          <h3>You May Also Like</h3>
+          <div class="movies-grid" id="similarGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p><i class="fas fa-film"></i> Movie Search — Built with Local Database</p>
+    </footer>
+  </div>
+
+  <script src="movie.js"></script>
+</body>
+</html>
