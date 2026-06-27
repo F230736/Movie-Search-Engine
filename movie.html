@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie Search — Discover Your Next Movie</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="movie-style.css">
@@ -42,23 +45,15 @@
 
     <!-- Main Content -->
     <main class="main-content" id="mainContent">
-      <!-- HOME / HERO -->
-      <section class="hero-section" id="heroSection">
-        <div class="hero-left">
-          <h1>Discover<br><span>Your Next Movie</span></h1>
-          <p>Search and explore thousands of movies from our curated database.</p>
-          <div class="hero-search">
-            <i class="fas fa-search"></i>
-            <input type="text" id="heroSearchInput" placeholder="Search for movies, actors, genres...">
-            <button class="hero-search-btn" id="heroSearchBtn">Search</button>
+      <!-- HERO BANNER - Full Width -->
+      <div class="hero-banner-wrapper">
+        <section class="hero-banner" id="heroBanner">
+          <div class="hero-banner-content" id="heroBannerContent">
+            <!-- Dynamic hero banner will be rendered here by JavaScript -->
           </div>
-        </div>
-        <div class="hero-right">
-          <div class="hero-image">
-            <i class="fas fa-film"></i>
-          </div>
-        </div>
-      </section>
+          <div class="hero-banner-dots" id="heroBannerDots"></div>
+        </section>
+      </div>
 
       <!-- POPULAR MOVIES -->
       <section class="movies-section" id="popularSection">
@@ -93,27 +88,28 @@
     </section>
 
     <!-- CATEGORY VIEW -->
-    <section class="category-view" id="categoryView" style="display:none;">
-      <div class="main-content">
-        <div class="search-header">
-          <h2 id="categoryTitle">Popular</h2>
-          <button class="back-btn" onclick="showHome()"><i class="fas fa-arrow-left"></i> Back to Home</button>
-        </div>
-        <div class="sort-bar" id="categorySort">
-          <label>Sort by:</label>
-          <select id="sortSelect" onchange="sortCategory()">
-            <option value="rating_desc">Rating: High to Low</option>
-            <option value="rating_asc">Rating: Low to High</option>
-            <option value="year_desc">Year: Newest First</option>
-            <option value="year_asc">Year: Oldest First</option>
-            <option value="votes_desc">Most Voted</option>
-            <option value="title_asc">Title: A-Z</option>
-          </select>
-        </div>
-        <div class="movies-grid" id="categoryGrid"></div>
-        <div class="pagination" id="categoryPagination"></div>
-      </div>
-    </section>
+<section class="category-view" id="categoryView" style="display:none;">
+  <div class="main-content">
+    <div class="search-header">
+      <h2 id="categoryTitle">Popular</h2>
+      <button class="back-btn" onclick="showHome()"><i class="fas fa-arrow-left"></i> Back to Home</button>
+    </div>
+    <div class="sort-bar" id="categorySort">
+      <label>Sort by:</label>
+      <select id="sortSelect" onchange="sortCategory()">
+        <option value="rating_desc">Rating: High to Low</option>
+        <option value="rating_asc">Rating: Low to High</option>
+        <option value="year_desc">Year: Newest First</option>
+        <option value="year_asc">Year: Oldest First</option>
+        <option value="votes_desc">Most Voted</option>
+        <option value="title_asc">Title: A-Z</option>
+      </select>
+      <span id="categorySource" style="font-size:0.75rem;color:var(--text-muted);margin-left:auto;"></span>
+    </div>
+    <div class="movies-grid" id="categoryGrid"></div>
+    <div class="pagination" id="categoryPagination"></div>
+  </div>
+</section>
 
     <!-- MOVIE DETAIL -->
     <section class="movie-detail" id="movieDetail" style="display:none;">
@@ -129,10 +125,12 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <p><i class="fas fa-film"></i> Movie Search — Built with Local Database</p>
+      <p><i class="fas fa-film"></i> Movie Search — Built with TMDB & Local Database</p>
     </footer>
   </div>
 
+  <!-- Load movieApi first, then movie.js -->
+  <script src="movieApi.js"></script>
   <script src="movie.js"></script>
 </body>
 </html>
